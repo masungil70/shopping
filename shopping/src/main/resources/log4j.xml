@@ -10,6 +10,19 @@
 		</layout>
 	</appender>
 	
+	<!-- 로그를 DB에 기록 할 수 있게 설정 추가   -->
+	<appender name="dailyFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="c:\\spring\\logs\\output.log" />
+		<param name="append" value="false" />
+    	<param name="Threshold" value="ALL" />
+    	<param name="MaxFileSize" value="1MB" />  
+    	<param name="MaxBackupIndex" value="4" />
+     		<layout class="org.apache.log4j.PatternLayout">
+			<param name="DatePattern" value="'.'yyyy-MM-dd" />
+			<param name="ConversionPattern" value="[%d{HH:mm:ss}][%-5p](%F:%L) %c - %m%n" />
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.kosa.shopping">
 		<level value="info" />
@@ -34,8 +47,9 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
+		<appender-ref ref="dailyFileAppender" />
 	</root>
 	
 </log4j:configuration>
